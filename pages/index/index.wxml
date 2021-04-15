@@ -1,0 +1,695 @@
+<!--index.wxml-->
+<shouDialog id="shouDialog" bind:success="success" uid="{{uid}}"></shouDialog>
+<view class="container">
+  <view class="head flex-between">
+    <view class="location">
+      <view class="quyu">松北区</view>
+      <view class="tianqi">
+        多云 -17°C 
+        <text>优</text>
+      </view>
+    </view>
+    <view class="search-box flex-center">
+      <image src="/images/search.png"></image>
+      <input type="text" placeholder="搜索" />
+    </view>
+  </view>
+  <!-- 用户 -->
+  <view class="user-bar flex-between">
+    <view class="flex-left">
+      <image wx:if="{{userInfo}}" src="{{userInfo.headimgurl}}"></image>
+      <image wx:else src="/images/headimg.png"></image>
+      <block>
+        <text class="user-name" wx:if="{{userInfo}}">{{userInfo.nickname}}</text>
+        <text class="user-name" wx:else>您还未登录</text>
+      </block>
+      
+    </view>
+    <text class="user-stutas" bindtap="goLogin" wx:if="{{!userInfo}}">请登录</text>
+    <text class="user-stutas" bindtap="goOut" wx:else>退出</text>
+  </view>
+  <view class="page-title">
+    <text class="title-left">我的证照</text>
+    <view class="title-right">
+      <text>全部</text>
+      <image src="/images/next.png"></image>
+    </view>
+  </view>
+  <view class="banner">
+    <swiper class="imageContainer" bindchange="handleChange" autoplay="true" interval="3000" circular="true" duration="200">
+      <block>
+        <swiper-item class="item" wx:for="{{banner}}" wx:key="banner">
+          <image src="{{item}}"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots-box flex-center">
+      <view class="{{currentIndex==index?'dots-active':'dots-item'}}" wx:for="{{banner}}"></view>
+    </view>
+  </view>
+  
+  
+  <view class="navi-list">
+    <view class="tab-bar">
+      <scroll-view class="bottom_scroll" scroll-x="true" scroll-left="{{x}}" scroll-with-animation="{{true}}">
+        <view class="tab-item" bindtap="bindItem" wx:for="{{tabArr}}" wx:key="tab" data-idx="{{index}}">
+          <text class="{{idx==index?'item-active':''}}">{{item}}</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 政务服务 -->
+    <block wx:if="{{idx==4}}">
+      <view class="flex-left nav-item">
+        <image src="/images/zw1.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>政策法规</text>
+          <text>查看政策法规相关公告内容</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw2.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>接待日</text>
+          <text>查看接待日相关公告内容</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw3.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>工作制度</text>
+          <text>查看工作制度相关公告内容</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw4.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>通知公告</text>
+          <text>查看通知公告相关公告内容</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw5.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>工作快讯</text>
+          <text>查看工作快讯相关公告内容</text>
+        </view>
+      </view>
+      
+      <view class="flex-left nav-item">
+        <image src="/images/zw6.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>社情民意</text>
+          <text>查看社情民意相关公告内容</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/xz4.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>一站式服务</text>
+          <text>提供一站式服务相关信息的查询与办理服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/xz5.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>一窗式办理</text>
+          <text>提供一窗式办理相关信息的查询与办理服务</text>
+        </view>
+      </view>
+    </block>
+    <!-- 便民 -->
+    <block wx:if="{{idx==5}}">
+      <view class="flex-left nav-item">
+        <image src="/images/bm1.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>交通查询</text>
+          <text>查看实时公交车行驶信息</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/bm2.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>常用电话</text>
+          <text>各类常用电话展示与梳理</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/bm4.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>物业报修</text>
+          <text>提供各小区物业报修服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/bm5.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>娱乐空间</text>
+          <text>提供周边娱乐场所使用情况查询服务</text>
+        </view>
+      </view>
+      
+      <view class="flex-left nav-item">
+        <image src="/images/bm6.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>周边商家</text>
+          <text>提供周边商家各类打折信息</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/xz.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>社区服务</text>
+          <text>提供社区公告、社区通知等便民服务信息</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/xz7.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>商城</text>
+          <text>提供在线商城价格查询等便民服务</text>
+        </view>
+      </view>
+    </block>
+  <!-- 公共服务 -->
+  <block wx:if="{{idx==0}}">
+      <view class="flex-left nav-item">
+        <image src="/images/gg2.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>法律援助</text>
+          <text>提供在线法律援助及咨询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/gg1.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>办证办照</text>
+          <text>提供在线办证、办照、查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/gg3.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>随手拍</text>
+          <text>提供市民随手拍、在线举报服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/gg4.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>百姓谈</text>
+          <text>提供百姓谈及相关内容咨询服务</text>
+        </view>
+      </view>
+
+    </block>
+    <!-- 服务 -->
+    <block wx:if="{{idx==1}}">
+      <view class="flex-left nav-item">
+        <image src="/images/fw06.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>公积金</text>
+          <text>查询缴存信息及明细、提取预约</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw14.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>社保医保</text>
+          <text>五险缴费情况、对应待遇及服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/fw20.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>护照通行证</text>
+          <text>护照、通行证签注与预约</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw24.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>行驶驾驶</text>
+          <text>违章缴法查询、车辆及证件服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw25.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>税务</text>
+          <text>个人税务查询、电子票据开具</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw26.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>户政（治安）</text>
+          <text>户籍、身份证、居住登记等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/fw27.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>生活缴费</text>
+          <text>燃气充值、电力、有线电视报修等</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw28.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>交通出行</text>
+          <text>为市民提供汽运出行便利</text>
+        </view>
+      </view>
+
+      <view class="flex-left nav-item">
+        <image src="/images/fw01.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>不动产服务</text>
+          <text>不动产信息查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw14.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>消防服务</text>
+          <text>火灾受损申报、隐患举报等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/fw04.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>公共服务</text>
+          <text>移车、天气、环境等公共服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw11.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>人才与就业</text>
+          <text>人才证书及教育信息等查询与办理</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw02.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>城市特色</text>
+          <text>12345咨询、小升初电脑派位等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw03.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>法律服务</text>
+          <text>法律咨询与援助、法院服务等</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/fw16.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>调解仲裁</text>
+          <text>劳动人事调节、仲裁业务办理</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw12.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>社会援助</text>
+          <text>寻亲、救助站查询、社会救助预约</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw08.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>教育服务</text>
+          <text>提供考试、教育信息、入学报名服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/fw19.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>信用服务</text>
+          <text>企事业单位、社会组织信用信息查询</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw18.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>心理咨询</text>
+          <text>心理、恋爱季新冠肺炎资讯</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/fw09.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>就医服务</text>
+          <text>挂号、就诊缴费、报表查询等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw05.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>海关服务</text>
+          <text>跨境商品、进出境邮件通关查询</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/fw06.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>婚姻事</text>
+          <text>先领证、补领证预约等相关服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw14.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>生育</text>
+          <text>申领出生医学证明、生育登记等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/fw20.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>养老退休</text>
+          <text>津贴申请、退休证明开具等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw22.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>中介超市</text>
+          <text>为企业提供网上中介邀约等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/fw15.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>市场监督</text>
+          <text>企业信用信息公示服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw13.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>社会组织</text>
+          <text>社会组织查询、社会团体变更登记</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw23.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>助残</text>
+          <text>残疾人证件和补贴申请、个人减税</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw10.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>农村农业</text>
+          <text>认证农产品、龙头企业、合作社查询</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw21.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>志愿者服务</text>
+          <text>加入志愿者组织及报名活动</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/fw07.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>监所服务</text>
+          <text>办理网上顾送、会见预约等服务</text>
+        </view>
+      </view>
+    </block>
+    <!-- 居民服务 -->
+    <block wx:if="{{idx==2}}">
+      <view class="flex-left nav-item">
+        <image src="/images/jm05.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>物业呼叫</text>
+          <text>提供物业呼叫、物业咨询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/jm10.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>报事报修</text>
+          <text>提供在线物业报修、服务查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/jm11.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>费用查缴</text>
+          <text>提供各类费用在线缴纳、查询等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/jm09.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>我的钥匙</text>
+          <text>提供各类居民各类入门证件服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/jm04.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>访客邀约</text>
+          <text>提供居民在线访客邀约服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/jm08.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>问卷调查</text>
+          <text>提供各类在线问卷咨询与调查服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/jm06.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>投票表决</text>
+          <text>提供各类在线投票、表决等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/jm12.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>物业活动</text>
+          <text>查看物业活动、资讯、动态等信息</text>
+        </view>
+      </view>
+
+      <view class="flex-left nav-item">
+        <image src="/images/jm03.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>物业动态</text>
+          <text>查看物业动态、公告等相关信息</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/jm13.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>我的房产</text>
+          <text>提供查看个人房产信息服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/jm01.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>APP云门禁开门</text>
+          <text>提供居民在小区内各类门禁信息服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/jm02.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>云监控</text>
+          <text>提供居民在小区内各类云监控服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/jm07.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>云停车</text>
+          <text>提供小区内停车信息在线查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/jm01.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>人脸采集</text>
+          <text>提供居民人脸采集服务，获取真实用户信息</text>
+        </view>
+      </view>
+    </block>
+    <!-- 政务 -->
+    <!-- <block hidden="true">
+      <view class="flex-left nav-item">
+        <image src="/images/jm05.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>新增人口</text>
+          <text>提供区域内新增人口记录与查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw10.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>新增车辆</text>
+          <text>提供区域内新增车辆记录与查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/zw03.png" mode="widthFix"></image>
+        <view class="list-content">
+          <text>社情民意</text>
+          <text>提供区域内社情民意查看服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw12.png" mode="widthFix"></image>
+        <view class="list-content">
+          <text>实有部件</text>
+          <text>提供区域内实有部件查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw15.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>人口审核</text>
+          <text>提供区域内人口审核查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw06.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>受理</text>
+          <text>提供区域内受理服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/zw07.png" mode="widthFix"></image>
+        <view class="list-content">
+          <text>待办结</text>
+          <text>提供区域内待办结服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw18.png" mode="widthFix"></image>
+        <view class="list-content">
+          <text>待回访</text>
+          <text>提供区域内待回访服务的相关查询服务</text>
+        </view>
+      </view>
+
+      <view class="flex-left nav-item">
+        <image src="/images/zw17.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>已完成</text>
+          <text>提供区域内已完成服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw09.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>新增查询</text>
+          <text>提供区域内新增查询服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/zw11.png" mode="widthFix"></image>
+        <view class="list-content">
+          <text>待巡查</text>
+          <text>提供区域内待巡查服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw04.png" mode="widthFix"></image>
+        <view class="list-content">
+          <text>待复查</text>
+          <text>办理网上顾送、会见预约等服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw16.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>已完成</text>
+          <text>提供区域内已完成服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw08.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>纠纷上报</text>
+          <text>提供区域内纠纷上报服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw05.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>处理反馈</text>
+          <text>提供区域内处理反馈服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw13.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>活动管理</text>
+          <text>提供区域内活动管理服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw14.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>活动审核</text>
+          <text>提供区域内活动审核服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw01.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>人员审核</text>
+          <text>提供区域内人员审核服务的相关查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/zw04.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>报名审核</text>
+          <text>提供区域内报名审核服务的相关查询服务</text>
+        </view>
+      </view>
+    </block> -->
+    <!-- 党建引领 -->
+    <block wx:if="{{idx==3}}">
+      <view class="flex-left nav-item">
+        <image src="/images/xz1.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>组织建设</text>
+          <text>提供组织建设相关信息的查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item">
+        <image src="/images/xz2.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>组织宣传</text>
+          <text>提供组织宣传相关服务的查询服务</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goPhoto">
+        <image src="/images/xz3.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>三会一课</text>
+          <text>提供三会一课相关信息的查询与介绍服务</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="ssp-btn" bindtap="goPhoto">
+    <text>随手拍</text>
+    <!-- <image src="/images/gg3.png" mode="widthFix"></image> -->
+  </view>
+</view>

@@ -1,0 +1,51 @@
+/**app.wxss**/
+.list-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.head-img{
+  width: 80rpx;
+  height: 80rpx;
+}
+.border{
+  border-radius: 10rpx;
+  border: 1px #eeeeee solid;
+}
+.item-column{
+  display: flex;
+  flex-direction: column;
+}
+.fontsize30{
+  font-size: 30rpx;
+  color: #333333;
+}
+.fontsize24{
+  font-size: 24rpx;
+  color: #999999;
+}
+.qrcode-box{
+  justify-content: center;
+  align-items: center;
+}
+/* 公公样式 */
+.flex-left{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-right{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

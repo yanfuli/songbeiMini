@@ -1,0 +1,38 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/shequ/shequ",
+    "pages/wuye/wuye",
+    "pages/renzheng/renzheng",
+    "pages/photo/photo",
+    "verify_mpsdk/index/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "松北新区民生服务平台",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#008caf",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/home-wei.png",
+      "selectedIconPath": "images/home.png"
+    },
+    {
+      "pagePath": "pages/shequ/shequ",
+      "text": "社区",
+      "iconPath": "images/shequ-wei.png",
+      "selectedIconPath": "images/shequ.png"
+    }
+  ]
+  },
+  "usingComponents": {
+    "shouDialog": "/components/shouquan-dialog/shouquan-dialog"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

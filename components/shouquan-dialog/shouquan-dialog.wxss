@@ -1,0 +1,43 @@
+.dialog{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.dialog-box{
+  width: 70%;
+  height: auto;
+  background-color: white;
+  border-radius: 10rpx;
+}
+.dialog-title{
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+}
+.dialog-content{
+  width: 90%;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  text-align: center;
+  margin: 0 auto;
+}
+.dialog-btn{
+  display: block;
+  width: 50%;
+  height: 70rpx;
+  line-height: 70rpx;
+  padding: 0;
+  background: #4393f4;
+  color: white;
+  font-size: 24rpx;
+  margin: 40rpx auto;
+}

@@ -1,0 +1,2 @@
+<!--pages/photo/photo.wxml-->
+<web-view src="{{https}}"></web-view>
