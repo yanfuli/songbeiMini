@@ -65,7 +65,13 @@ Component({
         wx.login({
           success(res) {
             console.log(res)
-            that.triggerEvent("success", { code:res.code,userInfo:e.detail });
+            wx.getUserInfo({
+              success: function(ress) {
+                console.log(ress);
+                that.triggerEvent("success", { code:res.code,userInfo:ress });
+              }
+            })
+           
           }
         })
       }

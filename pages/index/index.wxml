@@ -1,32 +1,35 @@
 <!--index.wxml-->
 <shouDialog id="shouDialog" bind:success="success" uid="{{uid}}"></shouDialog>
-<view class="container">
-  <view class="head flex-between">
+<view class="head">
     <view class="location">
       <view class="quyu">松北区</view>
       <view class="tianqi">
-        多云 -17°C 
+        多云 13°C 
         <text>优</text>
       </view>
     </view>
-    <view class="search-box flex-center">
-      <image src="/images/search.png"></image>
-      <input type="text" placeholder="搜索" />
+     <!-- 用户 -->
+    <view class="user-bar ">
+      <view class="flex-left">
+        <image wx:if="{{userInfo}}" src="{{userInfo.headimgurl}}"></image>
+        <image wx:else src="/images/headimg.png"></image>
+      </view>
+      <text class="user-stutas" bindtap="goLogin" wx:if="{{!userInfo}}">请登录</text>
+      <text class="user-stutas" bindtap="goOut" wx:else>退出</text>
     </view>
   </view>
-  <!-- 用户 -->
-  <view class="user-bar flex-between">
-    <view class="flex-left">
-      <image wx:if="{{userInfo}}" src="{{userInfo.headimgurl}}"></image>
-      <image wx:else src="/images/headimg.png"></image>
-      <block>
-        <text class="user-name" wx:if="{{userInfo}}">{{userInfo.nickname}}</text>
-        <text class="user-name" wx:else>您还未登录</text>
-      </block>
-      
-    </view>
-    <text class="user-stutas" bindtap="goLogin" wx:if="{{!userInfo}}">请登录</text>
-    <text class="user-stutas" bindtap="goOut" wx:else>退出</text>
+<view class="container">
+  <view class="page-title">
+    <text class="title-left">健康码</text>
+  </view>
+  <view class="healthCode">
+    <view class="flex-left nav-item">
+        <image src="/images/jiankang.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>龙江健康码</text>
+          <text>社区互信共享，提高出行效率</text>
+        </view>
+      </view>
   </view>
   <view class="page-title">
     <text class="title-left">我的证照</text>
@@ -44,19 +47,22 @@
       </block>
     </swiper>
     <view class="dots-box flex-center">
-      <view class="{{currentIndex==index?'dots-active':'dots-item'}}" wx:for="{{banner}}"></view>
+      <view class="{{currentIndex==index?'dots-active':'dots-item'}}" wx:for="{{banner}}" wx:key="banner"></view>
     </view>
   </view>
   
-  
-  <view class="navi-list">
-    <view class="tab-bar">
+  <view class="tab-bar">
       <scroll-view class="bottom_scroll" scroll-x="true" scroll-left="{{x}}" scroll-with-animation="{{true}}">
         <view class="tab-item" bindtap="bindItem" wx:for="{{tabArr}}" wx:key="tab" data-idx="{{index}}">
           <text class="{{idx==index?'item-active':''}}">{{item}}</text>
         </view>
       </scroll-view>
     </view>
+  <view class="navi-list">
+    <view class="commonlyUsed">
+      <text>常用服务</text>
+    </view>
+   
 
     <!-- 政务服务 -->
     <block wx:if="{{idx==4}}">
@@ -691,5 +697,8 @@
   <view class="ssp-btn" bindtap="goPhoto">
     <text>随手拍</text>
     <!-- <image src="/images/gg3.png" mode="widthFix"></image> -->
+  </view>
+  <view class="fotterTitle">
+    <text>哈尔滨市政府主办</text>
   </view>
 </view>

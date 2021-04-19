@@ -4,10 +4,6 @@ const app = getApp()
 
 Page({
   data: {
-    idx:1,
-    currentIndex: 0,  //banner活动页
-    banner:['/images/bnner.png'],
-    tabArr:['公共服务','服务','居民物业服务','党建引领','政务服务','便民服务'],
     idx:0
   },
   onLoad: function () {
@@ -28,12 +24,9 @@ Page({
           console.log(e)
             if(e.code==200){
                 console.log(e)
-                if(getApp().Coca.getStorageSync('loginStatus')){
-                  that.setData({
-                    userInfo:e.data
-                  })
-                }
-                
+                that.setData({
+                  userInfo:e.data
+                })
             }
         })
     },
@@ -60,7 +53,6 @@ Page({
           if(e.data.code==200){
               wx.removeStorageSync('token')
               wx.removeStorageSync('userInfo')
-              wx.removeStorageSync('loginStatus')
           }
           that.setData({
             userInfo:''
@@ -79,15 +71,15 @@ Page({
         getApp().Coca.setStorageSync('code', e.detail.code);
         getApp().Coca.setStorageSync('userInfo', e.detail.userInfo);
         wx.reLaunch({
-          url: '/pages/renzheng/renzheng',
+          url: '/pages/login2/login2',
         })
       },
       // 判断是否授权
       isShou: function () {
         var that = this;
         var token = getApp().Coca.getStorageSync('token');
-        console.log(token)
-        if (token != '' && token != undefined && token != null) {
+        var loginStatus = getApp().Coca.getStorageSync('loginStatus');
+        if (token != '' && token != undefined && token != null && loginStatus!='') {
           that.selectComponent("#shouDialog").hidDailog();
           that.getUser();
         } else {
@@ -98,11 +90,5 @@ Page({
           })
           that.selectComponent("#shouDialog").showDailog();
         }
-      },
-      // 随手拍
-      goPhoto(){
-        wx.navigateTo({
-          url: '/pages/photo/photo',
-        })
       }
 })

@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   data: {
+    tokenId:''
   },
   onLoad: function () {
 
@@ -112,6 +113,7 @@ requestLogin: function () {
         getApp().Coca.http_post('/faceid/setUserInfo', data, function (e) {
             console.log(e)
             if(e.data.code==200){
+              getApp().Coca.setStorageSync('loginStatus','1')
                 wx.switchTab({
                     url: '/pages/index/index',
                 })
@@ -126,4 +128,101 @@ requestLogin: function () {
             }
         })
     },
+    //身份证拍照登录
+    chosephon: function (e) {
+        var that = this;
+        wx.chooseImage({
+          count: 1, 
+          sizeType: ['original', 'compressed'], 
+          sourceType: ['album', 'camera'], 
+          success: function (res) {
+            wx.showLoading({
+              title:"加载中",
+              mask:true
+            });
+            var imgs=res.tempFilePaths[0];
+            console.log(res);
+            wx.getFileSystemManager().readFile({
+              filePath: imgs, 
+              encoding: 'base64', 
+              success: function(ress) { //成功的回调
+                console.log(ress)
+                var base64img = unescape(decodeURI(ress.data));  
+                base64img="data:image/png;base64,"+base64img;
+                var urls=app.data.domain;
+                that.actioncnt(urls,base64img)
+            }
+            })
+            
+          },
+          fail: function (res) {
+            console.log(res);
+          }
+        })
+      },
+      //存储token
+      actioncnt(urls,base64img){  
+        var that = this;
+        if(getApp().Coca.getStorageSync('token')){
+          that.imgUrlfun(urls,base64img)
+        }else{
+          var data = {
+            code: getApp().Coca.getStorageSync('code'),
+          }
+          console.log(data)
+          getApp().Coca.http_get("/user/loginByCode", data, function (e) {
+            console.log(e);
+            if (e.code == 200) {
+              getApp().Coca.setStorageSync('token',e.data.token)
+              getApp().Coca.setStorageSync('openId',e.data.openId)
+              that.imgUrlfun(urls,base64img)
+            } else {
+              getApp().Coca.toast(e.msg)
+            }
+          })
+        }
+       
+    },
+    //验证身份证照片
+    imgUrlfun(urls,base64img){
+      var that = this;
+      wx.request({
+        url:urls+"/faceid/idCardOcr",
+        data: {
+          imageBase64: base64img,
+        },
+        header: {
+          'content-type': 'application/json',
+          "Authorization":getApp().Coca.getStorageSync('token')
+        }, 
+        method: "POST",
+        success: function (tes) {
+          console.log(tes);
+          if(tes.data.code==200){
+            getApp().Coca.setStorageSync('loginStatus','1')
+            wx.switchTab({
+                url: '/pages/index/index',
+            })
+            wx.hideLoading();
+          }else if(tes.data.code==500){
+            wx.hideLoading();
+            wx.showToast({
+              title:tes.data.msg,
+              icon: 'none'
+            });
+          }
+          
+          
+        },
+        fail: function (tes) {
+          wx.hideLoading();
+          console.log(tes);
+          wx.showToast({
+            title: "连接异常",
+            icon: 'none',
+            mask: true
+          })
+        }
+      });
+    }  
 })

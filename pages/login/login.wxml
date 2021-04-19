@@ -1,0 +1,19 @@
+<view class="container">
+  <shouDialog id="shouDialog" bind:success="success" uid="{{uid}}"></shouDialog>
+  <view class="user-bar">
+      <image src="/images/headimg.png"></image>
+      <view class="page-title">
+        <text class="title-left">您好，</text>
+      </view>
+      <view class="page-title">
+        <text class="title-left2">欢迎使用松北新区民生服务平台</text>
+      </view>
+      <view class="page-title">
+        <text class="title-left3">登录后，可查询、办理各类政务服务</text>
+      </view>
+  </view>
+  <view class="form-box">
+    <view class="submit-btn" bindtap="isShou">登 录</view>
+  </view>
+  
+</view>
