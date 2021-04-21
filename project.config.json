@@ -40,7 +40,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.13.1",
+  "libVersion": "2.16.0",
   "appid": "wx24f21513535d01a6",
   "projectname": "renlian",
   "debugOptions": {

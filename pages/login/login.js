@@ -68,12 +68,21 @@ Page({
       success: function (e) {
         console.log(e)
         var that = this;
-        getApp().Coca.setStorageSync('code', e.detail.code);
-        getApp().Coca.setStorageSync('userInfo', e.detail.userInfo);
-        wx.reLaunch({
-          url: '/pages/login2/login2',
+        wx.login({
+          success(res) {
+            console.log(res)
+            getApp().Coca.setStorageSync('code', res.code);
+            getApp().Coca.setStorageSync('userInfo', e.detail.userInfo);
+             wx.reLaunch({
+              url: '/pages/login2/login2',
+            })
+          },
+          fail(res){
+            console.log(res)
+          }
         })
       },
+
       // 判断是否授权
       isShou: function () {
         var that = this;

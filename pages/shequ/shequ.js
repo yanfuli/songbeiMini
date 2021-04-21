@@ -52,19 +52,33 @@ Page({
     success: function (e) {
       console.log(e)
       var that = this;
-      if(e.detail.userInfo.errMsg=='getUserInfo:ok'){
-        getApp().Coca.setStorageSync('code', e.detail.code);
-        getApp().Coca.setStorageSync('userInfo', e.detail.userInfo);
-        wx.reLaunch({
-          url: '/pages/renzheng/renzheng',
-        })
-      }else{
-        getApp().Coca.toast('获取用户信息失败')
-        // wx.switchTab({
-        //   url: '/pages/index/index',
-        // })
-      }
+      wx.login({
+        success(res) {
+          console.log(res)
+          getApp().Coca.setStorageSync('code', res.code);
+          getApp().Coca.setStorageSync('userInfo', e.detail.userInfo);
+           wx.reLaunch({
+            url: '/pages/login2/login2',
+          })
+        },
+        fail(res){
+          console.log(res)
+        }
+      })
+      // if(e.detail.userInfo.errMsg=='getUserInfo:ok'){
+      //   getApp().Coca.setStorageSync('code', e.detail.code);
+      //   getApp().Coca.setStorageSync('userInfo', e.detail.userInfo);
+      //   wx.reLaunch({
+      //     url: '/pages/renzheng/renzheng',
+      //   })
+      // }else{
+      //   getApp().Coca.toast('获取用户信息失败')
+      //   // wx.switchTab({
+      //   //   url: '/pages/index/index',
+      //   // })
+      // }
     },
+
     // 判断是否授权
     isShou: function () {
       var that = this;

@@ -22,7 +22,7 @@
   <view class="page-title">
     <text class="title-left">健康码</text>
   </view>
-  <view class="healthCode">
+  <view class="healthCode" bindtap="healthCode">
     <view class="flex-left nav-item">
         <image src="/images/jiankang.png" mode="widthFix"></image>
         <view class="list-content flex-between">

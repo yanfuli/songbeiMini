@@ -104,5 +104,22 @@ Page({
         wx.navigateTo({
           url: '/pages/photo/photo',
         })
+      },
+      // 龙江健康码
+      healthCode(){
+        wx.navigateToMiniProgram({
+          appId: 'wx46842a007911c80d',
+          path: '',
+          extraData: {
+            foo: 'bar'
+          },
+          envVersion: 'release',
+          success(res) {
+            console.log(res)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
       }
 })
