@@ -103,14 +103,16 @@ requestLogin: function () {
         let that = this;
         let data = {
             // bizToken: that.data.BizToken,
-            encryptedData:getApp().Coca.getStorageSync('userInfo').encryptedData,
-            iv:getApp().Coca.getStorageSync('userInfo').iv,
-            rawData:getApp().Coca.getStorageSync('userInfo').rawData,
-            // sessionKey:getApp().Coca.getStorageSync('sessionKey'),
-            signature:getApp().Coca.getStorageSync('userInfo').signature,
+            avatarUrl:getApp().Coca.getStorageSync('userInfo').avatarUrl,
+            nickName:getApp().Coca.getStorageSync('userInfo').nickName,
+            gender:getApp().Coca.getStorageSync('userInfo').gender,
+            country:getApp().Coca.getStorageSync('userInfo').country,
+            province:getApp().Coca.getStorageSync('userInfo').province,
+            city:getApp().Coca.getStorageSync('userInfo').city,
+            language:getApp().Coca.getStorageSync('userInfo').language  
         }
         console.log(data)
-        getApp().Coca.http_post('/user/setInfo', data, function (e) {
+        getApp().Coca.http_post('/user/setInfo2', data, function (e) {
             console.log(e)
             if(e.data.code==200){
                 that.yanzheng();
