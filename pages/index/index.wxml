@@ -33,31 +33,32 @@
   </view>
   <view class="page-title">
     <text class="title-left">我的证照</text>
-    <view class="title-right">
+    <!-- <view class="title-right">
       <text>全部</text>
       <image src="/images/next.png"></image>
-    </view>
+    </view> -->
   </view>
   <view class="banner">
     <swiper class="imageContainer" bindchange="handleChange" autoplay="true" interval="3000" circular="true" duration="200">
       <block>
-        <swiper-item class="item" wx:for="{{banner}}" wx:key="banner">
+        <swiper-item class="item" wx:for="{{banner}}" wx:key="banner" bindtap="tapCard">
           <image src="{{item}}"/>
         </swiper-item>
       </block>
     </swiper>
-    <view class="dots-box flex-center">
+    <!-- <view class="dots-box flex-center">
       <view class="{{currentIndex==index?'dots-active':'dots-item'}}" wx:for="{{banner}}" wx:key="banner"></view>
-    </view>
+    </view> -->
   </view>
   
   <view class="tab-bar">
-      <scroll-view class="bottom_scroll" scroll-x="true" scroll-left="{{x}}" scroll-with-animation="{{true}}">
-        <view class="tab-item" bindtap="bindItem" wx:for="{{tabArr}}" wx:key="tab" data-idx="{{index}}">
-          <text class="{{idx==index?'item-active':''}}">{{item}}</text>
-        </view>
-      </scroll-view>
-    </view>
+    <scroll-view class="bottom_scroll" scroll-x="true" scroll-left="{{x}}" scroll-with-animation="{{true}}">
+      <view class="tab-item {{item}} {{idx==index?'active':''}}" bindtap="bindItem" wx:for="{{tabArr}}" wx:key="tab" data-idx="{{index}}">
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<view class="container2">
   <view class="navi-list">
     <view class="commonlyUsed">
       <text>常用服务</text>
@@ -253,7 +254,7 @@
           <text>户籍、身份证、居住登记等服务</text>
         </view>
       </view>
-      <view class="flex-left nav-item" bindtap="goPhoto">
+      <view class="flex-left nav-item" bindtap="jiaofei">
         <image src="/images/fw27.png" mode="widthFix"></image>
         <view class="list-content flex-between">
           <text>生活缴费</text>
@@ -699,6 +700,6 @@
     <!-- <image src="/images/gg3.png" mode="widthFix"></image> -->
   </view>
   <view class="fotterTitle">
-    <text>哈尔滨市政府主办</text>
+    <text>哈尔滨新区大数据主办</text>
   </view>
 </view>

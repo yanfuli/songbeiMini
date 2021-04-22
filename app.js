@@ -10,9 +10,8 @@ App({
   },
   Coca: require("utils/Coca.js"), //引入 util 类
   data:{
-    domain:"https://changsuo.kaiqun.net/songbeiApi",
-    // domain:"http://192.168.1.22/songbeiApi",
-    // domain:"http://192.168.1.6:8081",
+    // domain:"https://changsuo.kaiqun.net/songbeiApi",
+    domain:"http://192.168.1.6:8081",
     // shequ:'https://m.hzdssoft.com'
   }
 })

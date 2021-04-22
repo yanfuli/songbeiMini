@@ -6,8 +6,8 @@ Page({
   data: {
     idx:1,
     currentIndex: 0,  //banner活动页
-    banner:['/images/bnner.png'],
-    tabArr:['公共服务','服务','居民物业服务','党建引领','政务服务','便民服务'],
+    banner:['/images/banner.png'],
+    tabArr:['icon4','icon3','icon5','icon2','icon7','icon1'],
     idx:0
   },
   onLoad: function () {
@@ -105,10 +105,40 @@ Page({
           url: '/pages/photo/photo',
         })
       },
+      // 点击卡片
+      tapCard(){
+        wx.showModal({
+          title: '提示',
+          content: '此功能暂未开启，敬请期待！',
+          success (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      },
       // 龙江健康码
       healthCode(){
         wx.navigateToMiniProgram({
           appId: 'wx46842a007911c80d',
+          path: '',
+          extraData: {
+            foo: 'bar'
+          },
+          envVersion: 'release',
+          success(res) {
+            console.log(res)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
+      },
+      jiaofei(){
+        wx.navigateToMiniProgram({
+          appId: 'wxd2ade0f25a874ee2',
           path: '',
           extraData: {
             foo: 'bar'

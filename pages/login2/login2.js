@@ -62,7 +62,7 @@ requestLogin: function () {
         getApp().Coca.setStorageSync('token',e.data.token)
         getApp().Coca.setStorageSync('openId',e.data.openId)
         // getApp().Coca.setStorageSync('sessionKey',e.data.sessionKey)
-        that.yanzheng();
+        that.userInfo();
       } else {
         getApp().Coca.toast(e.msg)
       }
@@ -99,10 +99,10 @@ requestLogin: function () {
         });
     },
     // 身份验证
-    yanzheng(){
+    userInfo(){
         let that = this;
         let data = {
-            bizToken: that.data.BizToken,
+            // bizToken: that.data.BizToken,
             encryptedData:getApp().Coca.getStorageSync('userInfo').encryptedData,
             iv:getApp().Coca.getStorageSync('userInfo').iv,
             rawData:getApp().Coca.getStorageSync('userInfo').rawData,
@@ -110,7 +110,23 @@ requestLogin: function () {
             signature:getApp().Coca.getStorageSync('userInfo').signature,
         }
         console.log(data)
-        getApp().Coca.http_post('/faceid/setUserInfo', data, function (e) {
+        getApp().Coca.http_post('/user/setInfo', data, function (e) {
+            console.log(e)
+            if(e.data.code==200){
+                that.yanzheng();
+            }else{
+              getApp().Coca.toast(e.data.msg)
+
+            }
+        })
+    },
+    yanzheng(){
+      let that = this;
+        let data = {
+            bizToken: that.data.BizToken,
+        }
+        console.log(data)
+        getApp().Coca.http_post('/faceid/result', data, function (e) {
             console.log(e)
             if(e.data.code==200){
               getApp().Coca.setStorageSync('loginStatus','1')
