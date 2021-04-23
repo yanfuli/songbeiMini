@@ -1,0 +1,17 @@
+<!--components/navBar/navBar.wxml-->
+<view class="{{isShow?'nav-bar-hide':'nav-box'}}">
+  <view class="navicon" bindtap="tapIcon">
+    <image src="/images/nav2.png"></image>
+  </view>
+  <view class="nav-bar">
+    <navigator class="nav-item {{navidx==1?'active':''}}" url="/pages/index/index" hidden="{{isShow}}">
+      <image class="nav-icon" src="{{navidx==1?'/images/home.png':'/images/home-wei.png'}}"></image>
+      <text class="nav-text">首页</text>
+    </navigator>
+    <navigator class="nav-item {{navidx==2?'active':''}}" url="/pages/shequ/shequ" hidden="{{isShow}}">
+      <image class="nav-icon" src="{{navidx==2?'/images/shequ.png':'/images/shequ-wei.png'}}"></image>
+      <text class="nav-text">社区</text>
+    </navigator>
+  </view>
+  
+</view>

@@ -7,7 +7,7 @@ Page({
     idx:1,
     currentIndex: 0,  //banner活动页
     banner:['/images/banner.png'],
-    tabArr:['icon4','icon3','icon5','icon2','icon7','icon1'],
+    tabArr:['icon1','icon4','icon3','icon5','icon2','icon7'],
     idx:0
   },
   onLoad: function () {
@@ -151,5 +151,101 @@ Page({
             console.log(res)
           }
         })
-      }
+      },
+      yueche(){
+        wx.navigateToMiniProgram({
+          appId: 'wxaf35009675aa0b2a',
+          path: '',
+          extraData: {
+            foo: 'bar'
+          },
+          envVersion: 'release',
+          success(res) {
+            console.log(res)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
+      },
+      ditu(){
+        wx.navigateToMiniProgram({
+          appId: 'wx7643d5f831302ab0',
+          path: '',
+          extraData: {
+            foo: 'bar'
+          },
+          envVersion: 'release',
+          success(res) {
+            console.log(res)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
+      },
+      jipiao(){
+        wx.navigateToMiniProgram({
+          appId: 'wx0e6ed4f51db9d078',
+          path: '',
+          extraData: {
+            foo: 'bar'
+          },
+          envVersion: 'release',
+          success(res) {
+            console.log(res)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
+      },
+      goupiao(){
+        wx.navigateToMiniProgram({
+          appId: 'wxa51f55ab3b2655b9',
+          path: '',
+          extraData: {
+            foo: 'bar'
+          },
+          envVersion: 'release',
+          success(res) {
+            console.log(res)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
+      },
+      shangpu(){
+        wx.navigateToMiniProgram({
+          appId: 'wxde8ac0a21135c07d',
+          path: '',
+          extraData: {
+            foo: 'bar'
+          },
+          envVersion: 'release',
+          success(res) {
+            console.log(res)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
+      },
+      yimiao(){
+        wx.navigateToMiniProgram({
+          appId: 'wxb032bc789053daf4',
+          path: '',
+          extraData: {
+            foo: 'bar'
+          },
+          envVersion: 'release',
+          success(res) {
+            console.log(res)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
+      },
 })

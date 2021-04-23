@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <shouDialog id="shouDialog" bind:success="success" uid="{{uid}}"></shouDialog>
+<navBar navidx="1"></navBar>
 <view class="head">
     <view class="location">
       <view class="quyu">松北区</view>
@@ -66,7 +67,7 @@
    
 
     <!-- 政务服务 -->
-    <block wx:if="{{idx==4}}">
+    <block wx:if="{{idx==5}}">
       <view class="flex-left nav-item">
         <image src="/images/zw1.png" mode="widthFix"></image>
         <view class="list-content flex-between">
@@ -126,8 +127,57 @@
       </view>
     </block>
     <!-- 便民 -->
-    <block wx:if="{{idx==5}}">
-      <view class="flex-left nav-item">
+    <block wx:if="{{idx==0}}">
+      <view class="flex-left nav-item" bindtap="jiaofei">
+        <image src="/images/fw27.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>生活缴费</text>
+          <text>燃气充值、电力、有线电视报修等</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="yueche">
+        <image src="/images/sh1.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>约车服务</text>
+          <text>平台约车，方便，快捷</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="ditu">
+        <image src="/images/sh2.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>交通地图</text>
+          <text>服务百姓生活，出行不迷路</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="jipiao">
+        <image src="/images/sh3.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>航空机票</text>
+          <text>提供机票预订平台，方便，安全，快捷</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="goupiao">
+        <image src="/images/sh4.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>火车购票</text>
+          <text>提供火车购票平台，订票，抢票不必担忧</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="shangpu">
+        <image src="/images/sh5.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>周边商铺</text>
+          <text>周边美食，美景，游玩，应有尽有</text>
+        </view>
+      </view>
+      <view class="flex-left nav-item" bindtap="yimiao">
+        <image src="/images/sh6.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>疫苗预约</text>
+          <text>线上预约疫苗，不用等待</text>
+        </view>
+      </view>
+      <!-- <view class="flex-left nav-item">
         <image src="/images/bm1.png" mode="widthFix"></image>
         <view class="list-content flex-between">
           <text>交通查询</text>
@@ -176,10 +226,10 @@
           <text>商城</text>
           <text>提供在线商城价格查询等便民服务</text>
         </view>
-      </view>
+      </view> -->
     </block>
   <!-- 公共服务 -->
-  <block wx:if="{{idx==0}}">
+  <block wx:if="{{idx==1}}">
       <view class="flex-left nav-item">
         <image src="/images/gg2.png" mode="widthFix"></image>
         <view class="list-content flex-between">
@@ -211,7 +261,7 @@
 
     </block>
     <!-- 服务 -->
-    <block wx:if="{{idx==1}}">
+    <block wx:if="{{idx==2}}">
       <view class="flex-left nav-item">
         <image src="/images/fw06.png" mode="widthFix"></image>
         <view class="list-content flex-between">
@@ -254,13 +304,7 @@
           <text>户籍、身份证、居住登记等服务</text>
         </view>
       </view>
-      <view class="flex-left nav-item" bindtap="jiaofei">
-        <image src="/images/fw27.png" mode="widthFix"></image>
-        <view class="list-content flex-between">
-          <text>生活缴费</text>
-          <text>燃气充值、电力、有线电视报修等</text>
-        </view>
-      </view>
+
       <view class="flex-left nav-item">
         <image src="/images/fw28.png" mode="widthFix"></image>
         <view class="list-content flex-between">
@@ -432,7 +476,7 @@
       </view>
     </block>
     <!-- 居民服务 -->
-    <block wx:if="{{idx==2}}">
+    <block wx:if="{{idx==3}}">
       <view class="flex-left nav-item">
         <image src="/images/jm05.png" mode="widthFix"></image>
         <view class="list-content flex-between">
@@ -671,7 +715,7 @@
       </view>
     </block> -->
     <!-- 党建引领 -->
-    <block wx:if="{{idx==3}}">
+    <block wx:if="{{idx==4}}">
       <view class="flex-left nav-item">
         <image src="/images/xz1.png" mode="widthFix"></image>
         <view class="list-content flex-between">
@@ -700,6 +744,6 @@
     <!-- <image src="/images/gg3.png" mode="widthFix"></image> -->
   </view>
   <view class="fotterTitle">
-    <text>哈尔滨新区大数据主办</text>
+    <text>哈尔滨新区大数据</text>
   </view>
 </view>

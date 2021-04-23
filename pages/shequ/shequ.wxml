@@ -1,5 +1,6 @@
 <!--pages/shequ/shequ.wxml-->
 <shouDialog id="shouDialog" bind:success="success" uid="{{uid}}"></shouDialog>
+<navBar navidx="2"></navBar>
 <block wx:if="{{token}}">
   <web-view src="{{https}}"></web-view>
 </block>
