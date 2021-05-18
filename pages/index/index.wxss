@@ -12,7 +12,6 @@ page{
   padding-right: 30rpx;
   box-sizing: border-box;
   background: white;
-
 }
 .container2{
   width:100%;
@@ -68,7 +67,7 @@ page{
   width: 150rpx;
   height: 150rpx;
   display: inline-block;
-  white-space: normal;
+  white-space: nowrap;
   color: #333333;
   border-radius: 5px;
   border: 1px #ECECEC solid;
@@ -203,15 +202,13 @@ page{
   margin-left: 10rpx;
 }
 .user-bar{
-  width: 102rpx;
-  height: 150rpx;
   position: absolute;
-  right: 40rpx;
+  right: 30rpx;
   bottom:20rpx;
   display:flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  justify-content: space-around;
+  align-items: center; 
 }
 .user-bar image{
   width: 102rpx;
@@ -225,9 +222,24 @@ page{
   border-radius: 20rpx;
   font-size:18rpx;
 }
+.userimg{
+  width: 122rpx;
+  height: 122rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  /* margin-left: 12rpx; */
+}
+.username {
+  font-size:24rpx;
+}
+.right-icon{
+  width:11rpx;
+  height:20rpx;
+  margin-right: 20rpx;
+}
 .user-stutas{
   display: block;
-  width: 132rpx;
+  width: 152rpx;
   height: 45rpx;
   text-align: center;
   line-height: 45rpx;
@@ -235,7 +247,6 @@ page{
   background: #EBF3FB;
   border-radius: 20rpx;
   font-size:22rpx;
-  /* padding:7rpx 24rpx; */
   color: #999999;
 }
 .page-title{

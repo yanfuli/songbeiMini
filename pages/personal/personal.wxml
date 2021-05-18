@@ -1,0 +1,8 @@
+<!--pages/bindPhone/bindPhone.wxml-->
+<view class="page-w">
+  <!-- <view class="page-title">请绑定手机号码</view> -->
+  <view class="page-content">
+    登录设置
+  </view>
+  <button class="submit-btn" bindtap="goOut">退出登录</button>
+</view>

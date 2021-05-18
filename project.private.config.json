@@ -1,0 +1,41 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/bindPhone/bindPhone",
+          "pathName": "pages/bindPhone/bindPhone",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/personal/personal",
+          "pathName": "pages/personal/personal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/vaccination/vaccination",
+          "pathName": "pages/vaccination/vaccination",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/vaccination/vaccination",
+          "pathName": "pages/vaccination/vaccination",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

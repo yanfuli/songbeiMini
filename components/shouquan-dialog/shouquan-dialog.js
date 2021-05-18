@@ -60,65 +60,18 @@ Component({
       that.setData({
         isShow: true
       })
-      
-      // wx.getUserProfile({
-      //   desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      //   success: (ress) => {
-      //     console.log(ress);
-      //     that.triggerEvent("success", {userInfo:ress });
-      //     // wx.login({
-      //     //   success(res) {
-      //     //     console.log(res)
-      //     //     that.triggerEvent("success", { code:res.code,userInfo:ress });
-      //     //   },
-      //     //   fail(res){
-      //     //     console.log(res)
-      //     //   }
-      //     // })
-      //   },
-      //   fail:(ress)=>{
-      //     console.log(ress)
-      //   }
-      // })
       wx.getUserProfile({
         desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
         lang:'zh_CN',
         success: (ress) => {
           console.log(ress);
           that.triggerEvent("success", {userInfo:ress.userInfo });
-          // wx.login({
-          //   success(res) {
-          //     console.log(res)
-          //     that.triggerEvent("success", { code:res.code,userInfo:ress });
-          //   },
-          //   fail(res){
-          //     console.log(res)
-          //   }
-          // })
         },
         fail:(ress)=>{
           console.log(ress)
         }
       })
     },
-    //获取用户openid 
-    // requestLogin: function (code) {
-    //   var that = this;
-    //   var data = {
-    //     code: code,
-    //   }
-    //   console.log(data)
-    //   getApp().Coca.http_get("/user/loginByCode", data, function (e) {
-    //     if (e.code == 200) {
-    //       console.log(e)
-    //       var userInfo = that.data.userInfo
-    //       that.triggerEvent("success", { logindata:e.data,userInfo:userInfo });
-    //       // that.getWxInfo();
-    //     } else {
-    //       getApp().Coca.toast(e.msg)
-    //     }
-    //   })
-    // },
     // 获取用户微信信息
     getWxInfo(){
       var that = this;

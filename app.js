@@ -11,7 +11,7 @@ App({
   Coca: require("utils/Coca.js"), //引入 util 类
   data:{
     domain:"https://changsuo.kaiqun.net/songbeiApi",
-    // domain:"http://192.168.1.6:8081",
-    // shequ:'https://m.hzdssoft.com'
+    domain1:"https://epidemic.kaiqun.net",
+    domain2:'https://healthy.mangocloud.com.cn'
   }
 })

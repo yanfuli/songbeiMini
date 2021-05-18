@@ -29,6 +29,7 @@ Page({
             if(e.code==200){
                 console.log(e)
                 if(getApp().Coca.getStorageSync('loginStatus')){
+                  getApp().Coca.setStorageSync('userInfo', e.data);
                   that.setData({
                     userInfo:e.data
                   })
@@ -46,42 +47,33 @@ Page({
     // 登录
     goLogin(){
       // this.isShou();
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
-    },
-    // 退出
-    goOut(){
       let that = this;
-      let data = {
+      if(that.data.userInfo){
+        wx.navigateTo({
+          url: '/pages/personal/personal',
+        })
+      }else{
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
       }
-      getApp().Coca.http_post('/user/logout', data, function (e) {
-        console.log(e)
-          if(e.data.code==200){
-              wx.removeStorageSync('token')
-              wx.removeStorageSync('userInfo')
-              wx.removeStorageSync('loginStatus')
-          }
-          that.setData({
-            userInfo:''
-          })
-      })
     },
+
     onReady: function () {
       var that = this;
       // that.shouDialog = that.selectComponent('#shouDialog');
       that.shouDialog = that.selectComponent("#shouDialog");
     },
-      // 点击授权按钮
-      success: function (e) {
-        console.log(e)
-        var that = this;
-        getApp().Coca.setStorageSync('code', e.detail.code);
-        getApp().Coca.setStorageSync('userInfo', e.detail.userInfo);
-        wx.reLaunch({
-          url: '/pages/renzheng/renzheng',
-        })
-      },
+    // 点击授权按钮
+    success: function (e) {
+      console.log(e)
+      var that = this;
+      getApp().Coca.setStorageSync('code', e.detail.code);
+      getApp().Coca.setStorageSync('userInfo', e.detail.userInfo);
+      wx.reLaunch({
+        url: '/pages/renzheng/renzheng',
+      })
+    },
       // 判断是否授权
       isShou: function () {
         var that = this;
@@ -248,4 +240,14 @@ Page({
           }
         })
       },
+      yimiao1(){
+        var that = this;
+        if(that.data.userInfo){
+          wx.navigateTo({
+            url: "/pages/vaccination/vaccination",
+          })
+        }else{
+          getApp().Coca.toast('您还没登录，请先登录！')
+        }
+      }
 })

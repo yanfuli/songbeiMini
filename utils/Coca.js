@@ -104,15 +104,6 @@ function http_post(url, data, callBack, hideHUD = true) {
       title: '加载中',
     })
   }
-  
-  // if (Object.keys(data).length > 0){
-  //   var sign = ""
-  //   for (var Key in data) {
-  //     sign += Key + '=' + data[Key] + '&'
-  //   }
-  //   sign = sign + signKey
-  //   data["sign"] = md5.hexMD5(sign)
-  // }
 
   var that = this
   wx.request({

@@ -1,0 +1,30 @@
+<!--pages/vaccination/vaccination.wxml-->
+<view class="container">
+  <view class="banner">
+    <view class="username">姓名：<open-data type="userNickName"></open-data></view>
+    <view class="check-time">健康码码色：<text class="color-block color-{{colorbg}}"></text></view>
+    <view class="check-time">查询于：{{timeData}}</view>
+  </view>
+  <block wx:if="{{allData.length>0}}">
+    <view class="title">
+      新冠疫苗接种信息
+    </view>
+    <view class="content-box" wx:for="{{allData}}" wx:key="ym">
+      <view class="item">
+        <view class="item-name">新冠疫苗接种名称：</view>
+        <view class="item-content">{{item.goodsName}}</view>
+      </view>
+      <view class="item">
+        <view class="item-name">接种日期：</view>
+        <view class="item-content">{{item.vaccinateDate}}</view>
+      </view>
+      <view class="item">
+        <view class="item-name">接种频次：</view>
+        <view class="item-content">{{item.vaccinumNum}}</view>
+      </view>
+    </view>
+  </block>
+  <view wx:else class="tips">
+    暂未接种疫苗
+  </view>
+</view>

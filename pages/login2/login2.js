@@ -49,25 +49,6 @@ getBizToken(){
       }
     })
     },
-//获取用户openid 
-requestLogin: function () {
-    var that = this;
-    var data = {
-      code: getApp().Coca.getStorageSync('code'),
-    }
-    console.log(data)
-    getApp().Coca.http_get("/user/loginByCode", data, function (e) {
-      if (e.code == 200) {
-        console.log(e)
-        getApp().Coca.setStorageSync('token',e.data.token)
-        getApp().Coca.setStorageSync('openId',e.data.openId)
-        // getApp().Coca.setStorageSync('sessionKey',e.data.sessionKey)
-        that.userInfo();
-      } else {
-        getApp().Coca.toast(e.msg)
-      }
-    })
-  },
 
   // 单击某个按钮时，触发该函数
     gotoVerify: function () {
@@ -82,7 +63,7 @@ requestLogin: function () {
                 console.log(res)
                 setTimeout(() => {
                     // 验证成功后，拿到token后的逻辑处理，具体以客户自身逻辑为准
-                    that.requestLogin();
+                    that.yanzheng();
                 }, 500);
             },
             fail: (err) => {  // 验证失败时触发
@@ -99,29 +80,6 @@ requestLogin: function () {
         });
     },
     // 身份验证
-    userInfo(){
-        let that = this;
-        let data = {
-            // bizToken: that.data.BizToken,
-            avatarUrl:getApp().Coca.getStorageSync('userInfo').avatarUrl,
-            nickName:getApp().Coca.getStorageSync('userInfo').nickName,
-            gender:getApp().Coca.getStorageSync('userInfo').gender,
-            country:getApp().Coca.getStorageSync('userInfo').country,
-            province:getApp().Coca.getStorageSync('userInfo').province,
-            city:getApp().Coca.getStorageSync('userInfo').city,
-            language:getApp().Coca.getStorageSync('userInfo').language  
-        }
-        console.log(data)
-        getApp().Coca.http_post('/user/setInfo2', data, function (e) {
-            console.log(e)
-            if(e.data.code==200){
-                that.yanzheng();
-            }else{
-              getApp().Coca.toast(e.data.msg)
-
-            }
-        })
-    },
     yanzheng(){
       let that = this;
         let data = {
@@ -132,9 +90,7 @@ requestLogin: function () {
             console.log(e)
             if(e.data.code==200){
               getApp().Coca.setStorageSync('loginStatus','1')
-                wx.switchTab({
-                    url: '/pages/index/index',
-                })
+              that.getUser();
             }else{
                 getApp().Coca.tishi('确定',e.data.msg,function(){
                     wx.removeStorageSync('token')
@@ -218,9 +174,7 @@ requestLogin: function () {
           console.log(tes);
           if(tes.data.code==200){
             getApp().Coca.setStorageSync('loginStatus','1')
-            wx.switchTab({
-                url: '/pages/index/index',
-            })
+            that.getUser();
             wx.hideLoading();
           }else if(tes.data.code==500){
             wx.hideLoading();
@@ -242,5 +196,31 @@ requestLogin: function () {
           })
         }
       });
-    }  
+    } ,
+    // 获取用户信息
+    getUser(){
+      let that = this;
+        let data = {
+        }
+        getApp().Coca.http_get('/user/getInfo', data, function (e) {
+          console.log(e)
+            if(e.code==200){
+                console.log(e)
+                // if(getApp().Coca.getStorageSync('loginStatus')){
+                  getApp().Coca.setStorageSync('userInfo', e.data);
+                  var tel = e.data.tel;
+                  if(tel){
+                    wx.reLaunch({
+                      url: '/pages/index/index',
+                    })
+                  }else{
+                    wx.reLaunch({
+                      url: '/pages/bindPhone/bindPhone',
+                    })
+                  }
+                // }
+                
+            }
+        })
+    },
 })

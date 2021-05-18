@@ -1,9 +1,11 @@
 <view class="container">
   <shouDialog id="shouDialog" bind:success="success" uid="{{uid}}"></shouDialog>
   <view class="user-bar">
-      <image src="/images/headimg.png"></image>
+      <!-- <image src="/images/headimg.png"></image> -->
+      <open-data type="userAvatarUrl" class="userimg"></open-data>
       <view class="page-title">
-        <text class="title-left">您好，</text>
+        <open-data type="userNickName" class="username"></open-data>
+        <text class="title-left">,您好!</text>
       </view>
       <view class="page-title">
         <text class="title-left2">欢迎使用松北新区民生服务平台</text>
@@ -13,7 +15,7 @@
       </view>
   </view>
   <view class="form-box">
-    <view class="submit-btn" bindtap="isShou">登 录</view>
+    <button class="submit-btn" bindtap="getUserInfo">登 录</button>
   </view>
   
 </view>

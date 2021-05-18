@@ -10,16 +10,27 @@
       </view>
     </view>
      <!-- 用户 -->
-    <view class="user-bar ">
+    <view class="user-bar" bindtap="goLogin">
       <view class="flex-left">
-        <image wx:if="{{userInfo}}" src="{{userInfo.headimgurl}}"></image>
-        <image wx:else src="/images/headimg.png"></image>
+        <open-data type="userAvatarUrl" class="userimg"></open-data>
       </view>
-      <text class="user-stutas" bindtap="goLogin" wx:if="{{!userInfo}}">请登录</text>
-      <text class="user-stutas" bindtap="goOut" wx:else>退出</text>
+      <text class="user-stutas" wx:if="{{!userInfo}}">请登录</text>
+      <open-data type="userNickName" class="user-stutas" wx:else></open-data>
     </view>
   </view>
 <view class="container">
+  <view class="banner">
+    <swiper class="imageContainer" bindchange="handleChange" autoplay="true" interval="3000" circular="true" duration="200">
+      <block>
+        <swiper-item class="item" wx:for="{{banner}}" wx:key="banner" bindtap="tapCard">
+          <image src="{{item}}"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- <view class="dots-box flex-center">
+      <view class="{{currentIndex==index?'dots-active':'dots-item'}}" wx:for="{{banner}}" wx:key="banner"></view>
+    </view> -->
+  </view>
   <view class="page-title">
     <text class="title-left">健康码</text>
   </view>
@@ -33,27 +44,27 @@
       </view>
   </view>
   <view class="page-title">
+    <text class="title-left">疫苗预约</text>
+  </view>
+  <view class="healthCode" bindtap="yimiao">
+    <view class="flex-left nav-item">
+        <image src="/images/11.png" mode="widthFix"></image>
+        <view class="list-content flex-between">
+          <text>疫苗预约</text>
+          <text>线上预约疫苗，不用等待</text>
+        </view>
+      </view>
+    </view>
+  <view class="page-title">
     <text class="title-left">我的证照</text>
     <!-- <view class="title-right">
       <text>全部</text>
       <image src="/images/next.png"></image>
     </view> -->
   </view>
-  <view class="banner">
-    <swiper class="imageContainer" bindchange="handleChange" autoplay="true" interval="3000" circular="true" duration="200">
-      <block>
-        <swiper-item class="item" wx:for="{{banner}}" wx:key="banner" bindtap="tapCard">
-          <image src="{{item}}"/>
-        </swiper-item>
-      </block>
-    </swiper>
-    <!-- <view class="dots-box flex-center">
-      <view class="{{currentIndex==index?'dots-active':'dots-item'}}" wx:for="{{banner}}" wx:key="banner"></view>
-    </view> -->
-  </view>
   
   <view class="tab-bar">
-    <scroll-view class="bottom_scroll" scroll-x="true" scroll-left="{{x}}" scroll-with-animation="{{true}}">
+    <scroll-view class="bottom_scroll" scroll-x="{{true}}" scroll-left="{{x}}" scroll-with-animation="{{true}}">
       <view class="tab-item {{item}} {{idx==index?'active':''}}" bindtap="bindItem" wx:for="{{tabArr}}" wx:key="tab" data-idx="{{index}}">
       </view>
     </scroll-view>
@@ -170,13 +181,13 @@
           <text>周边美食，美景，游玩，应有尽有</text>
         </view>
       </view>
-      <view class="flex-left nav-item" bindtap="yimiao">
+      <!-- <view class="flex-left nav-item" bindtap="yimiao">
         <image src="/images/sh6.png" mode="widthFix"></image>
         <view class="list-content flex-between">
           <text>疫苗预约</text>
           <text>线上预约疫苗，不用等待</text>
         </view>
-      </view>
+      </view> -->
       <!-- <view class="flex-left nav-item">
         <image src="/images/bm1.png" mode="widthFix"></image>
         <view class="list-content flex-between">
@@ -744,6 +755,6 @@
     <!-- <image src="/images/gg3.png" mode="widthFix"></image> -->
   </view>
   <view class="fotterTitle">
-    <text>哈尔滨新区大数据</text>
+    <text>哈尔滨新区大数据中心</text>
   </view>
 </view>

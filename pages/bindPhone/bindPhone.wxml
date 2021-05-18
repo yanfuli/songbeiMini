@@ -1,0 +1,8 @@
+<!--pages/bindPhone/bindPhone.wxml-->
+<view class="page-w">
+  <view class="page-title">请绑定手机号码</view>
+  <view class="page-content">
+    请绑定你的常用手机号，以便为提供更便捷的服务
+  </view>
+  <button class="submit-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">进行绑定</button>
+</view>
